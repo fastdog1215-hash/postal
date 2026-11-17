@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제주지방우정청 대국민 소통 포털</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts (Noto Sans KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            redPrimary: '#DC2626',      // 우체국 대표 레드
+            redPrimaryDark: '#991B1B',  // 진한 버건디 레드
+            redPrimaryLight: '#EF4444', // 밝은 레드
+            roseSoft: '#FFE4E6',        // 부드러운 로즈 틴트
+            roseBg: '#FFF1F2',          // 연한 붉은빛 배경
+            crimsonDark: '#450A0A',     // 깊은 다크 와인
+            warmCoral: '#F43F5E'        // 코랄 레드 포인트
+          },
+          fontFamily: {
+            sans: ['"Noto Sans KR"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Noto Sans KR', sans-serif; scroll-behavior: smooth; word-break: keep-all; }
+    /* 여린 빨강(소프트 로즈-레드) 그라데이션 및 제주 대표 성산일출봉/바다 배경 */
+    .hero-red-bg {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.72) 0%, rgba(244, 63, 94, 0.65) 50%, rgba(190, 18, 60, 0.75) 100%), 
+                  url('https://images.unsplash.com/photo-1616798249081-30877e213b16?auto=format&fit=crop&w=1920&q=85') center/cover no-repeat;
+    }
+    .red-glow {
+      box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.25);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #FCA5A5;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-[#FFF8F8] text-stone-800 antialiased flex flex-col min-h-screen">
+
+  <!-- Top Announcement Bar (Red Deep Theme) -->
+  <div class="bg-gradient-to-r from-redPrimaryDark via-redPrimary to-rose-900 text-white text-xs md:text-sm py-2.5 px-4 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="bg-white text-redPrimary text-[11px] font-black px-2.5 py-0.5 rounded-full shadow-sm">우정소식</span>
+        <span class="font-medium tracking-tight">제주도내 전 우체국 창구에서 제주은행 금융서비스(입출금·이체)를 편리하게 이용하세요!</span>
+      </div>
+      <div class="flex items-center gap-4 text-rose-100 text-xs">
+        <span><i class="fa-solid fa-phone mr-1 text-amber-300"></i> 우체국 콜센터 1588-1300</span>
+        <span class="hidden sm:inline text-rose-300/50">|</span>
+        <span class="hidden sm:inline"><i class="fa-solid fa-location-dot mr-1 text-rose-300"></i> 제주시 청사로 59</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-rose-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-redPrimary to-redPrimaryDark flex items-center justify-center text-white text-2xl shadow-md group-hover:scale-105 group-hover:rotate-1 transition-all duration-200">
+          <i class="fa-solid fa-envelope-open-text"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-black text-redPrimary tracking-wider uppercase">우정사업본부</span>
+            <span class="text-[10px] bg-rose-100 text-redPrimaryDark font-bold px-1.5 py-0.5 rounded">Jeju Post</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-stone-900 tracking-tight group-hover:text-redPrimary transition-colors">제주지방우정청</h1>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 font-semibold text-stone-700">
+        <a href="#about" class="hover:text-redPrimary transition-colors">청 소개</a>
+        <a href="#services" class="hover:text-redPrimary transition-colors">주요 업무</a>
+        <a href="#issues" class="hover:text-redPrimary transition-colors flex items-center gap-1.5">
+          <span>최근 핵심이슈</span>
+          <span class="w-2 h-2 rounded-full bg-redPrimary animate-ping"></span>
+        </a>
+        <a href="#postal-stats" class="hover:text-redPrimary transition-colors flex items-center gap-1.5">
+          <span>우편통계정보</span>
+          <span class="text-[10px] bg-redPrimary text-white font-bold px-1.5 py-0.2 rounded-full">New</span>
+        </a>
+        <a href="#citizen-tools" class="hover:text-redPrimary transition-colors">국민 편의도구</a>
+        <a href="#notice" class="hover:text-redPrimary transition-colors">도민소통</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="#citizen-tools" class="px-4 py-2.5 text-sm font-bold text-redPrimaryDark bg-rose-100/70 hover:bg-rose-200/80 rounded-xl transition-all">
+          <i class="fa-solid fa-magnifying-glass mr-1.5 text-redPrimary"></i> 배송조회
+        </a>
+        <a href="#issues" class="px-4 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-redPrimary to-redPrimaryDark hover:from-redPrimaryDark hover:to-crimsonDark rounded-xl shadow-md hover:shadow-lg transition-all red-glow">
+          상생금융 바로보기 <i class="fa-solid fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobileMenuBtn" class="md:hidden text-2xl text-stone-700 hover:text-redPrimary focus:outline-none p-2">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-rose-100 px-6 py-4 space-y-3">
+      <a href="#about" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">청 소개</a>
+      <a href="#services" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">주요 업무</a>
+      <a href="#issues" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">최근 핵심이슈</a>
+      <a href="#postal-stats" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">우정사업본부 우편통계</a>
+      <a href="#citizen-tools" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">국민 편의도구</a>
+      <a href="#notice" class="block py-2 text-stone-700 font-semibold hover:text-redPrimary">도민소통 & FAQ</a>
+    </div>
+  </header>
+
+  <!-- Hero Section (Red Vibrant Theme) -->
+  <section class="hero-red-bg text-white py-20 lg:py-28 px-4 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/25 backdrop-blur-md text-sm font-semibold mb-6 border border-white/20 shadow-sm">
+          <i class="fa-solid fa-heart text-amber-300"></i>
+          <span>도민과 늘 함께하는 따뜻한 붉은 우체통의 약속</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-6">
+          제주의 미래를 잇고,<br>
+          <span class="text-amber-300">도민의 행복</span>을 배달합니다
+        </h2>
+        <p class="text-base sm:text-xl text-rose-50 font-normal leading-relaxed mb-8 text-opacity-95">
+          신속한 우편물 배송부터 제주은행 상생금융, 취약계층 복지 안전망, 지역사회 안심 순찰까지!<br class="hidden sm:inline">
+          국민 곁에서 365일 든든하고 따뜻한 동반자가 되어드리는 제주지방우정청입니다.
+        </p>
+
+        <!-- Quick Access Buttons -->
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#issues" class="px-6 py-4 bg-amber-400 hover:bg-amber-300 text-stone-950 font-black rounded-xl shadow-xl transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <span>2024~2026 주요 현안 보기</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </a>
+          <a href="#services" class="px-6 py-4 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-bold rounded-xl backdrop-blur-sm transition-all">
+            4대 핵심 업무 안내
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Stats Cards (Red Tinted Glassmorphism) -->
+    <div class="max-w-7xl mx-auto mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+      <div class="bg-black/35 backdrop-blur-md border border-white/25 rounded-2xl p-5 shadow-lg">
+        <div class="text-amber-300 text-2xl sm:text-3xl font-black mb-1">100%</div>
+        <div class="text-xs sm:text-sm text-rose-100 font-medium">제주 전 지역 도서산간 직배송</div>
+      </div>
+      <div class="bg-black/35 backdrop-blur-md border border-white/25 rounded-2xl p-5 shadow-lg">
+        <div class="text-amber-300 text-2xl sm:text-3xl font-black mb-1">상생금융</div>
+        <div class="text-xs sm:text-sm text-rose-100 font-medium">제주은행 창구망 전면 공동이용</div>
+      </div>
+      <div class="bg-black/35 backdrop-blur-md border border-white/25 rounded-2xl p-5 shadow-lg">
+        <div class="text-amber-300 text-2xl sm:text-3xl font-black mb-1">복지안전망</div>
+        <div class="text-xs sm:text-sm text-rose-100 font-medium">집배원 복지등기 & 안심순찰망</div>
+      </div>
+      <div class="bg-black/35 backdrop-blur-md border border-white/25 rounded-2xl p-5 shadow-lg">
+        <div class="text-amber-300 text-2xl sm:text-3xl font-black mb-1">만원의 행복</div>
+        <div class="text-xs sm:text-sm text-rose-100 font-medium">취약계층 공익보험 지원사업</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Jeju Post -->
+  <section id="about" class="py-16 bg-white border-b border-rose-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-redPrimary font-black text-xs sm:text-sm tracking-widest uppercase bg-rose-50 px-3 py-1 rounded-full border border-rose-200">About Us</span>
+        <h3 class="text-3xl font-extrabold text-stone-900 mt-3">제주지방우정청은 어떤 기관인가요?</h3>
+        <p class="text-stone-600 mt-3 text-base">
+          제주특별자치도 전역의 우체국과 우편취급국을 총괄·관리하며 도민들의 일상에 꼭 필요한 보편적 우정·금융 서비스를 제공하는 공공기관입니다.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-[#FFF5F5] p-7 rounded-2xl border border-rose-100 hover:shadow-xl hover:border-redPrimary/40 transition-all">
+          <div class="w-12 h-12 bg-red-100 text-redPrimary rounded-xl flex items-center justify-center text-xl mb-5 shadow-sm">
+            <i class="fa-solid fa-flag"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-900 mb-2">기관 미션</h4>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            보편적 우편서비스와 국영 금융서비스를 안정적으로 제공함으로써 도민 생활의 편익을 증진하고 지역사회 발전에 기여합니다.
+          </p>
+        </div>
+
+        <div class="bg-[#FFF5F5] p-7 rounded-2xl border border-rose-100 hover:shadow-xl hover:border-redPrimary/40 transition-all">
+          <div class="w-12 h-12 bg-red-100 text-redPrimaryDark rounded-xl flex items-center justify-center text-xl mb-5 shadow-sm">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-900 mb-2">핵심 비전</h4>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            도서산간 소외 없는 공공 물류망과 디지털 기반의 포용적 금융 생태계를 구축하여 제주도민에게 가장 신뢰받는 우정청으로 도약합니다.
+          </p>
+        </div>
+
+        <div class="bg-[#FFF5F5] p-7 rounded-2xl border border-rose-100 hover:shadow-xl hover:border-redPrimary/40 transition-all">
+          <div class="w-12 h-12 bg-red-100 text-warmCoral rounded-xl flex items-center justify-center text-xl mb-5 shadow-sm">
+            <i class="fa-solid fa-handshake-angle"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-900 mb-2">사회적 가치 실현</h4>
+          <p class="text-stone-600 text-sm leading-relaxed">
+            골목길 구석구석을 누비는 집배 인프라를 활용하여 독거어르신 안부 확인, 범죄 및 안전사고 예방 등 촘촘한 사회 안전망을 함께 만듭니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Major Responsibilities Section (Red Accent) -->
+  <section id="services" class="py-20 bg-[#FFF5F5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-redPrimaryDark font-black text-xs sm:text-sm tracking-widest uppercase bg-rose-100 px-3 py-1 rounded-full border border-rose-200">Core Business</span>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-3">제주지방우정청 주요 업무 안내</h3>
+        <p class="text-stone-600 mt-3">편리하고 든든한 4대 핵심 분야로 도민과 함께 호흡합니다.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Service 1 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-rose-100 hover:border-redPrimary hover:shadow-lg transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-2xl mb-6 group-hover:bg-redPrimary group-hover:text-white transition-all">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h4 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-redPrimary transition-colors">1. 우편 및 물류 서비스</h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              국내 일반/등기우편 및 특급소포, 해외 EMS 특송 서비스. 제주 감귤, 특산물 등 도내 생산 농수산물의 안전하고 신속한 전국 직배송망을 운영합니다.
+            </p>
+          </div>
+          <ul class="text-xs text-stone-500 space-y-1.5 pt-4 border-t border-rose-100">
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 익일특급 소포 배송 체계</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 제주 특산품 우체국쇼핑 판로지원</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 우도·추자 등 도서지역 특화 배송</li>
+          </ul>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-rose-100 hover:border-redPrimary hover:shadow-lg transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-2xl mb-6 group-hover:bg-redPrimary group-hover:text-white transition-all">
+              <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <h4 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-redPrimary transition-colors">2. 국영 우체국 예금</h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              국가가 원금과 이자를 전액 보장하는 100% 안전한 국영 예금입니다. 입출금통장, 정기예금, 적금 및 시중은행 제휴 창구 서비스를 제공합니다.
+            </p>
+          </div>
+          <ul class="text-xs text-stone-500 space-y-1.5 pt-4 border-t border-rose-100">
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 예금자보호법 초과 전액 국가 지급보장</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 제주은행 등 창구망 공동 이용</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 비대면 스마트뱅킹 & 스마트ATM</li>
+          </ul>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-rose-100 hover:border-redPrimary hover:shadow-lg transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-2xl mb-6 group-hover:bg-redPrimary group-hover:text-white transition-all">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <h4 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-redPrimary transition-colors">3. 서민 맞춤 우체국 보험</h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              사업비와 보험료 거품을 뺀 서민형 국영 보험 상품을 운영합니다. 실손의료비, 암, 건강보험부터 저소득층을 위한 공익보험까지 든든하게 지켜드립니다.
+            </p>
+          </div>
+          <ul class="text-xs text-stone-500 space-y-1.5 pt-4 border-t border-rose-100">
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 저소득층 만원의행복보험 보급</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 소아암 환우 및 취약계층 수술비 지원</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 무배당 알뜰 건강 및 상해보험</li>
+          </ul>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-rose-100 hover:border-redPrimary hover:shadow-lg transition-all flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-2xl mb-6 group-hover:bg-redPrimary group-hover:text-white transition-all">
+              <i class="fa-solid fa-users-viewfinder"></i>
+            </div>
+            <h4 class="text-xl font-bold text-stone-900 mb-3 group-hover:text-redPrimary transition-colors">4. 공공 복지 & 안전망</h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-4">
+              집배원 네트워크를 기반으로 지자체·경찰청과 연계한 복지등기우편, 위기가구 조기 발굴, 골목길 안심 순찰 등 공적 안전망 역할을 수행합니다.
+            </p>
+          </div>
+          <ul class="text-xs text-stone-500 space-y-1.5 pt-4 border-t border-rose-100">
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 고독사 예방 안부살핌 복지등기</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 제주경찰청 범죄예방 협력 신고망</li>
+            <li><i class="fa-solid fa-check text-redPrimary mr-1.5"></i> 지역 어르신 금융사기(보이스피싱) 예방</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Issues & Hot Topics Section (Red Styled Cards) -->
+  <section id="issues" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-100 text-redPrimary text-xs font-bold rounded-full mb-3 border border-red-200">
+            <i class="fa-solid fa-fire text-redPrimary"></i> 도민 관심 집중 이슈
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-stone-900">제주지방우정청 최근 핵심 이슈</h3>
+          <p class="text-stone-600 mt-2">최근 도민 삶의 질을 높이기 위해 우정청이 역점 추진하고 있는 정책과 성과입니다.</p>
+        </div>
+        <div class="mt-4 md:mt-0 text-sm text-stone-500 font-medium">
+          <i class="fa-regular fa-clock mr-1 text-redPrimary"></i> 실시간 업데이트 현황
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Issue 1 -->
+        <div class="bg-gradient-to-b from-[#FFF5F5] to-white rounded-3xl p-7 lg:p-8 border border-rose-200 shadow-sm hover:shadow-xl hover:border-redPrimary/50 transition-all relative overflow-hidden flex flex-col justify-between group">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-rose-200/50 rounded-bl-full -mr-6 -mt-6"></div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-redPrimaryDark bg-rose-100 px-3 py-1 rounded-full mb-4 border border-rose-200">
+              <i class="fa-solid fa-hand-holding-dollar"></i> 금융상생 및 소외해소
+            </div>
+            <h4 class="text-xl sm:text-2xl font-bold text-stone-900 mb-4 leading-snug break-keep">
+              우체국 창구망 활용 <br><span class="text-redPrimary">'제주은행 금융서비스'</span><br class="hidden sm:inline"> 전격 제공
+            </h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-6 break-keep">
+              시중은행 지점 폐쇄로 금융 접근성이 떨어진 읍·면 지역 주민과 고령층을 위해, 도내 우체국 창구와 ATM에서 제주은행 통장 입·출금, 조회, 송금 수수료 면제 서비스를 원스톱으로 지원합니다.
+            </p>
+            <div class="bg-white p-4 rounded-xl border border-rose-100 space-y-2 mb-6 text-xs text-stone-600 shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">이용 가능 업무</span>
+                <span class="font-medium">입·출금, 계좌이체, 잔액조회</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">이용 수수료</span>
+                <span class="text-redPrimary font-bold">우체국 이용 시 전액 면제</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">효과</span>
+                <span class="font-medium">농어촌·중산간 금융 소외 제로화</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="openIssueModal(1)" class="w-full py-3.5 bg-redPrimary hover:bg-redPrimaryDark text-white text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 red-glow">
+            <span>자세히 알아보기</span>
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+
+        <!-- Issue 2 -->
+        <div class="bg-gradient-to-b from-[#FFF5F5] to-white rounded-3xl p-7 lg:p-8 border border-rose-200 shadow-sm hover:shadow-xl hover:border-redPrimary/50 transition-all relative overflow-hidden flex flex-col justify-between group">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-rose-200/50 rounded-bl-full -mr-6 -mt-6"></div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-redPrimaryDark bg-rose-100 px-3 py-1 rounded-full mb-4 border border-rose-200">
+              <i class="fa-solid fa-shield-halved"></i> 치안 & 안전망 구축
+            </div>
+            <h4 class="text-xl sm:text-2xl font-bold text-stone-900 mb-4 leading-snug break-keep">
+              제주경찰청 협력 <br><span class="text-redPrimary">'골목길 안심 파트너'</span><br class="hidden sm:inline"> 안전망
+            </h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-6 break-keep">
+              매일 도내 구석구석을 누비는 우체국 집배원들이 범죄 예방과 위기 가구 수호천사로 나섭니다. 위험 요소 발견 시 신속한 112 신고 및 도민 안전 이상 징후 조기 포착 체계를 가동 중입니다.
+            </p>
+            <div class="bg-white p-4 rounded-xl border border-rose-100 space-y-2 mb-6 text-xs text-stone-600 shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">참여 인력</span>
+                <span class="font-medium">도내 우체국 집배원 전원</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">중점 활동</span>
+                <span class="font-medium">치안 사각지대 탐색, 거동수상자 신고</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">협약 기관</span>
+                <span class="font-medium">제주특별자치도경찰청</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="openIssueModal(2)" class="w-full py-3.5 bg-redPrimary hover:bg-redPrimaryDark text-white text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 red-glow">
+            <span>자세히 알아보기</span>
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+
+        <!-- Issue 3 -->
+        <div class="bg-gradient-to-b from-[#FFF5F5] to-white rounded-3xl p-7 lg:p-8 border border-rose-200 shadow-sm hover:shadow-xl hover:border-redPrimary/50 transition-all relative overflow-hidden flex flex-col justify-between group">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-rose-200/50 rounded-bl-full -mr-6 -mt-6"></div>
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-redPrimaryDark bg-rose-100 px-3 py-1 rounded-full mb-4 border border-rose-200">
+              <i class="fa-solid fa-hand-holding-heart"></i> 따뜻한 복지행정
+            </div>
+            <h4 class="text-xl sm:text-2xl font-bold text-stone-900 mb-4 leading-snug break-keep">
+              취약계층을 위한 <br><span class="text-redPrimary">'만원의 행복보험'</span><br class="hidden sm:inline"> 무료가입 지원
+            </h4>
+            <p class="text-stone-600 text-sm leading-relaxed mb-6 break-keep">
+              경제적 여건으로 상해보험 가입이 어려운 기초생활수급자 및 차상위계층을 위해, 본인 부담금 1만원을 우정청 및 공공기관이 전액 매칭 지원하여 1년간 재해사고를 든든히 보장합니다.
+            </p>
+            <div class="bg-white p-4 rounded-xl border border-rose-100 space-y-2 mb-6 text-xs text-stone-600 shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">지원 대상</span>
+                <span class="font-medium">수급자 및 차상위계층 가구</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">보장 내역</span>
+                <span class="font-medium">상해입원비, 수술비, 사망보험금</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-stone-700">본인 부담금</span>
+                <span class="text-redPrimary font-bold">0원 (공익지원 혜택)</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="openIssueModal(3)" class="w-full py-3.5 bg-redPrimary hover:bg-redPrimaryDark text-white text-sm font-bold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 red-glow">
+            <span>자세히 알아보기</span>
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Citizen Convenience Tools (Warm Red Tone) -->
+  <section id="citizen-tools" class="py-20 bg-[#FFF2F2] border-y border-rose-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-redPrimary font-black text-xs sm:text-sm tracking-widest uppercase bg-rose-100 px-3 py-1 rounded-full border border-rose-200">Citizen Tools</span>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-3">국민 편의 인터랙티브 서비스</h3>
+        <p class="text-stone-600 mt-3">자주 찾는 우정 서비스를 사이트 내에서 빠르고 편리하게 조회해 보세요.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Tool 1: Parcel Tracking -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-rose-200">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-stone-900">등기 / 우체국택배 배송조회</h4>
+              <p class="text-xs text-stone-500">13자리 등기번호를 입력하여 실시간 배송 상황을 확인하세요.</p>
+            </div>
+          </div>
+
+          <form id="trackingForm" onsubmit="handleTrack(event)" class="space-y-4">
+            <div class="flex gap-2">
+              <input type="text" id="trackInput" placeholder="예: 6890123456789 (숫자 13자리)" 
+                     class="flex-1 px-4 py-3.5 border border-rose-200 rounded-xl focus:ring-2 focus:ring-redPrimary focus:border-redPrimary outline-none text-sm transition-all bg-[#FFFAFA]" required>
+              <button type="submit" class="px-6 py-3.5 bg-redPrimary hover:bg-redPrimaryDark text-white font-bold rounded-xl text-sm transition-all shadow-md hover:shadow-lg red-glow">
+                조회하기
+              </button>
+            </div>
+          </form>
+
+          <!-- Tracking Result Area -->
+          <div id="trackingResult" class="mt-6 p-5 rounded-2xl bg-[#FFF8F8] border border-rose-200 hidden">
+            <div class="flex items-center justify-between pb-3 border-b border-rose-200 text-sm">
+              <span class="font-bold text-stone-800">등기번호: <span id="resNumber" class="text-redPrimary font-mono"></span></span>
+              <span id="resStatus" class="px-3 py-1 text-xs font-bold rounded-full bg-red-100 text-redPrimaryDark border border-rose-200">배송 완료</span>
+            </div>
+            <div class="mt-3 text-xs space-y-2 text-stone-600">
+              <div class="flex justify-between">
+                <span>보낸 사람: 제주특산영농조합</span>
+                <span class="font-semibold text-stone-800">받는 분: 홍*동 님</span>
+              </div>
+              <div class="flex justify-between">
+                <span>도착지: 제주시 연동</span>
+                <span class="font-semibold text-stone-800">담당 집배원: 오제주 집배원</span>
+              </div>
+              <p class="text-[11px] text-stone-400 mt-2">* 데모 모의 조회 결과입니다. 실제 우체국 API와 연동 가능한 형태입니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tool 2: Postage Calculator -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-rose-200">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-red-50 text-redPrimary flex items-center justify-center text-xl shadow-sm">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-stone-900">제주 우편·소포 예상요금 계산기</h4>
+              <p class="text-xs text-stone-500">발송 형태와 무게를 선택하면 예상 요금을 즉시 알려드립니다.</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">우편 종류</label>
+                <select id="postType" onchange="calculatePostage()" class="w-full px-3 py-3 border border-rose-200 rounded-xl text-sm focus:ring-2 focus:ring-redPrimary outline-none bg-[#FFFAFA]">
+                  <option value="standard">일반 우편/엽서</option>
+                  <option value="registered">등기 통상</option>
+                  <option value="parcel">우체국 택배(육지 발송)</option>
+                  <option value="island">제주도내 소포</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">중량 / 규격</label>
+                <select id="postWeight" onchange="calculatePostage()" class="w-full px-3 py-3 border border-rose-200 rounded-xl text-sm focus:ring-2 focus:ring-redPrimary outline-none bg-[#FFFAFA]">
+                  <option value="light">규격 내 (25g 이하)</option>
+                  <option value="medium">중간 규격 (50g 이하)</option>
+                  <option value="box_small">소형 박스 (3kg 이하)</option>
+                  <option value="box_large">대형 박스 (10kg 이하)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-rose-50 to-red-50 rounded-2xl p-5 border border-rose-200 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-stone-500 font-medium">예상 우편 요금</div>
+                <div class="text-3xl font-black text-redPrimary" id="calcPrice">430원</div>
+              </div>
+              <div class="text-right text-xs">
+                <span class="inline-block bg-white text-redPrimaryDark px-3 py-1.5 rounded-lg border border-rose-200 font-bold shadow-sm">제주도 특수요금 기준 적용</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-stone-400">* 항공운송 여부 및 부피에 따라 현장 접수 시 소폭 달라질 수 있습니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Postal Statistics Section (우정사업본부 및 전국 9개 지방청 통계) -->
+  <section id="postal-stats" class="py-20 bg-gradient-to-b from-white to-[#FFF5F5] border-t border-rose-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header with Mode Toggle -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-100 text-redPrimary text-xs font-bold rounded-full mb-3 border border-red-200">
+            <i class="fa-solid fa-chart-column text-redPrimary"></i> 국가승인통계 제12002호 & 실시간 일자별 추정 지표
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-stone-900 break-keep">
+            우정사업본부 & 지방청별 우편통계정보
+          </h3>
+          <p class="text-stone-600 mt-2 text-sm sm:text-base break-keep">
+            연도별 시계열 추이 분석부터 당일(매일) 실시간 접수·배달 물류 현황까지 대화형으로 제공합니다.
+          </p>
+        </div>
+
+        <!-- Mode Toggle Tabs (연도별 vs 매일자료) -->
+        <div class="mt-4 md:mt-0 flex items-center bg-rose-100/70 p-1 rounded-2xl border border-rose-200">
+          <button id="btnTabYear" onclick="switchStatsMode('year')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-redPrimary shadow-sm">
+            <i class="fa-solid fa-calendar-days mr-1.5"></i>연도별 통계
+          </button>
+          <button id="btnTabDaily" onclick="switchStatsMode('daily')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-stone-600 hover:text-redPrimary">
+            <i class="fa-solid fa-bolt mr-1.5 text-amber-500"></i>매일(일자별) 현황
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Date & Interactive Filter Bar -->
+      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-rose-200 shadow-sm mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- Year Mode Selectors -->
+        <div id="filterYearGroup" class="flex flex-wrap items-center gap-3">
+          <span class="text-xs font-bold text-stone-700"><i class="fa-solid fa-sliders text-redPrimary mr-1"></i>조회 연도:</span>
+          <div class="flex gap-1.5">
+            <button onclick="selectYear(2025)" id="btnYear2025" class="year-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-redPrimary text-white shadow-sm transition-all">2025년</button>
+            <button onclick="selectYear(2024)" id="btnYear2024" class="year-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-stone-700 hover:bg-rose-100 transition-all">2024년</button>
+            <button onclick="selectYear(2023)" id="btnYear2023" class="year-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-stone-700 hover:bg-rose-100 transition-all">2023년</button>
+            <button onclick="selectYear(2022)" id="btnYear2022" class="year-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-stone-700 hover:bg-rose-100 transition-all">2022년</button>
+          </div>
+          <span class="text-[11px] text-stone-400 hidden lg:inline">| 연도별 승인통계 기준 데이터 갱신</span>
+        </div>
+
+        <!-- Daily Mode Indicator (Hidden in Year Mode) -->
+        <div id="filterDailyGroup" class="hidden flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 실시간 전국 우정물류망 정상가동
+          </span>
+          <span class="text-xs text-stone-600 font-medium">
+            기준일자: <b id="dailyCurrentDate" class="text-stone-900 font-bold">2026년 11월 17일 (화)</b>
+          </span>
+          <button onclick="refreshDailyStats()" class="px-2.5 py-1 text-xs bg-rose-50 hover:bg-rose-100 text-redPrimary border border-rose-200 rounded-lg transition-colors font-semibold">
+            <i class="fa-solid fa-arrows-rotate mr-1"></i>새로고침
+          </button>
+        </div>
+
+        <!-- Meta Source Info -->
+        <div class="text-xs text-stone-500 flex items-center gap-2">
+          <span id="statsModeBadge" class="bg-rose-100 text-redPrimaryDark px-2 py-0.5 rounded text-[11px] font-bold">연간 공식 승인통계</span>
+          <span class="hidden sm:inline text-stone-300">|</span>
+          <a href="https://www.data.go.kr" target="_blank" class="hover:underline text-[11px] text-stone-500 flex items-center gap-1">
+            공공데이터포털(data.go.kr) <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Top Metric Cards (Dynamic ID-bound) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
+            <span id="metricTitle1">연간 총 접수 우편물량</span>
+            <span class="p-1.5 rounded-lg bg-rose-50 text-redPrimary"><i class="fa-solid fa-envelope"></i></span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-stone-900" id="statTotalVolume">
+            약 24.6<span class="text-base font-bold text-redPrimary ml-1">억 통</span>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-1" id="metricSub1">전자고지 확대로 통상우편 완만 감소</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
+            <span id="metricTitle2">국민 1인당 연간 이용량</span>
+            <span class="p-1.5 rounded-lg bg-rose-50 text-redPrimary"><i class="fa-solid fa-user-check"></i></span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-stone-900" id="statPerCapita">
+            48.1<span class="text-base font-bold text-redPrimary ml-1">통</span>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-1" id="metricSub2">서신·등기·소포 통합 1인 평균</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
+            <span id="metricTitle3">전국 총 우체국 창구망</span>
+            <span class="p-1.5 rounded-lg bg-rose-50 text-redPrimary"><i class="fa-solid fa-building"></i></span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-stone-900" id="statOffices">
+            3,200<span class="text-base font-bold text-redPrimary ml-1">여 개소</span>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-1" id="metricSub3">총괄국·일반국·우편취급국·별정국</p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
+            <span id="metricTitle4">제주지방우정청 비중</span>
+            <span class="p-1.5 rounded-lg bg-rose-50 text-redPrimary"><i class="fa-solid fa-plane-departure"></i></span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-stone-900" id="statJejuFocus">
+            특산물 1위<span class="text-base font-bold text-redPrimary ml-1">(소포비중)</span>
+          </div>
+          <p class="text-[11px] text-stone-400 mt-1" id="metricSub4">감귤·수산물 항공·해상 전용선박망</p>
+        </div>
+      </div>
+
+      <!-- Main Statistics Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+        
+        <!-- Left: Mail Composition Breakdown (5 Cols) -->
+        <div class="lg:col-span-5 bg-white p-6 sm:p-7 rounded-3xl border border-rose-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <h4 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-redPrimary"></i> 종별 우편물량 구성 현황
+              </h4>
+              <span class="text-xs text-stone-400">국내외 통합비율</span>
+            </div>
+            <p class="text-xs text-stone-600 mb-6 leading-relaxed break-keep">
+              우편물은 고지서·서신 중심의 일반통상 우편이 가장 큰 비중을 차지하며, 전자상거래 발달에 따라 우체국소포(택배)의 공공 물류 비중이 지속적으로 강화되고 있습니다.
+            </p>
+
+            <!-- Visual Bar Representation -->
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-stone-700" id="gaugeLabel1">일반통상 우편 (서신, 일반고지서 등)</span>
+                  <span class="text-redPrimary" id="gaugeVal1">78.5% (약 19.3억 통)</span>
+                </div>
+                <div class="w-full bg-rose-100 rounded-full h-3">
+                  <div id="gaugeBar1" class="bg-redPrimary h-3 rounded-full transition-all duration-500" style="width: 78.5%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-stone-700" id="gaugeLabel2">우체국소포 및 택배 물류</span>
+                  <span class="text-redPrimary" id="gaugeVal2">15.2% (약 3.7억 통)</span>
+                </div>
+                <div class="w-full bg-rose-100 rounded-full h-3">
+                  <div id="gaugeBar2" class="bg-rose-500 h-3 rounded-full transition-all duration-500" style="width: 15.2%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-stone-700" id="gaugeLabel3">특수통상 (등기우편, 내용증명, 복지등기)</span>
+                  <span class="text-redPrimary" id="gaugeVal3">5.8% (약 1.4억 통)</span>
+                </div>
+                <div class="w-full bg-rose-100 rounded-full h-3">
+                  <div id="gaugeBar3" class="bg-rose-400 h-3 rounded-full transition-all duration-500" style="width: 5.8%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-stone-700" id="gaugeLabel4">국제우편 및 EMS(국제특급)</span>
+                  <span class="text-redPrimary" id="gaugeVal4">0.5% (약 1,200만 통)</span>
+                </div>
+                <div class="w-full bg-rose-100 rounded-full h-3">
+                  <div id="gaugeBar4" class="bg-stone-400 h-3 rounded-full transition-all duration-500" style="width: 2.5%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-rose-100 bg-[#FFF8F8] p-3.5 rounded-xl text-[11px] text-stone-500 flex items-start gap-2">
+            <i class="fa-solid fa-circle-info text-redPrimary mt-0.5"></i>
+            <span>제주지방우정청은 도서물류 특성상 감귤·수산물 등 특산품 소포 발송 비중이 타 지방청 대비 월등히 높게 집계됩니다.</span>
+          </div>
+        </div>
+
+        <!-- Right: 9 Regional Offices Table & Distribution (7 Cols) -->
+        <div class="lg:col-span-7 bg-white p-6 sm:p-7 rounded-3xl border border-rose-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <h4 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                <i class="fa-solid fa-map-location text-redPrimary"></i> 전국 9개 지방우정청 관할 및 통계 현황
+              </h4>
+              <span class="text-xs text-redPrimary font-bold bg-rose-100 px-2.5 py-1 rounded-full">전국망 총괄</span>
+            </div>
+            
+            <div class="overflow-x-auto custom-scroll">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-rose-50 text-stone-700 border-b border-rose-200">
+                    <th class="py-2.5 px-3 font-bold rounded-l-lg">지방우정청</th>
+                    <th class="py-2.5 px-3 font-bold">관할 구역</th>
+                    <th class="py-2.5 px-3 font-bold text-center">우체국 분포</th>
+                    <th class="py-2.5 px-3 font-bold text-right rounded-r-lg" id="colHeaderVol">물류 비중</th>
+                  </tr>
+                </thead>
+                <tbody id="regionalTableBody" class="divide-y divide-rose-100 text-stone-600">
+                  <!-- Injected via JavaScript for Year and Daily modes -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-400">
+            <span>* 관할 우체국 수치는 직영관서 및 우편취급국을 포괄한 최근 운영 통계 기준입니다.</span>
+            <a href="https://www.data.go.kr" target="_blank" class="text-redPrimary hover:underline font-semibold flex items-center gap-1">
+              공공데이터포털 통계 원문 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Notice & FAQ Accordion Section -->
+  <section id="notice" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="text-redPrimary font-black text-xs sm:text-sm tracking-widest uppercase bg-rose-100 px-3 py-1 rounded-full border border-rose-200">Citizen Center</span>
+        <h3 class="text-3xl font-extrabold text-stone-900 mt-3">도민 자주 묻는 질문 (FAQ)</h3>
+        <p class="text-stone-600 mt-3">제주도민분들이 가장 많이 궁금해하시는 우편 및 금융 이용 안내입니다.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="border border-rose-100 rounded-2xl overflow-hidden transition-all shadow-sm">
+          <button onclick="toggleFaq(1)" class="w-full text-left p-5 bg-[#FFF9F9] hover:bg-[#FFF1F1] font-bold text-stone-800 flex justify-between items-center transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-redPrimary text-white text-xs flex items-center justify-center font-black shadow-sm">Q</span>
+              제주은행 통장을 우체국 창구에서 어떻게 이용하나요?
+            </span>
+            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-redPrimary transition-transform"></i>
+          </button>
+          <div id="faq-answer-1" class="hidden p-5 bg-white text-stone-600 text-sm leading-relaxed border-t border-rose-100">
+            제주 도내 모든 총괄우체국 및 읍·면 소재 우체국 창구와 자동화기기(ATM)에서 제주은행의 입출금, 통장 정리, 타행 계좌이체 서비스를 그대로 이용하실 수 있습니다. 이용 수수료는 우체국 창구 이용 시 전액 면제 혜택이 적용됩니다.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border border-rose-100 rounded-2xl overflow-hidden transition-all shadow-sm">
+          <button onclick="toggleFaq(2)" class="w-full text-left p-5 bg-[#FFF9F9] hover:bg-[#FFF1F1] font-bold text-stone-800 flex justify-between items-center transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-redPrimary text-white text-xs flex items-center justify-center font-black shadow-sm">Q</span>
+              감귤 등 신선 농산물을 육지로 보낼 때 신속 배송이 가능한가요?
+            </span>
+            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-redPrimary transition-transform"></i>
+          </button>
+          <div id="faq-answer-2" class="hidden p-5 bg-white text-stone-600 text-sm leading-relaxed border-t border-rose-100">
+            네! 제주지방우정청은 도내 농가를 위해 전용 항공·선박 물류 수송망을 상시 가동하고 있습니다. 접수 마감 시간 이전 접수 시 익일 배송(육지 주요 대도시 기준)이 가능하며, 대량 발송 농가를 위한 방문접수 및 전용 박스 포장 지원 서비스도 운영 중입니다.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border border-rose-100 rounded-2xl overflow-hidden transition-all shadow-sm">
+          <button onclick="toggleFaq(3)" class="w-full text-left p-5 bg-[#FFF9F9] hover:bg-[#FFF1F1] font-bold text-stone-800 flex justify-between items-center transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-redPrimary text-white text-xs flex items-center justify-center font-black shadow-sm">Q</span>
+              독거 어르신 안부를 확인해 주는 '복지등기'는 어떻게 신청하나요?
+            </span>
+            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-redPrimary transition-transform"></i>
+          </button>
+          <div id="faq-answer-3" class="hidden p-5 bg-white text-stone-600 text-sm leading-relaxed border-t border-rose-100">
+            복지등기 서비스는 지방자치단체(제주시, 서귀포시 및 각 읍·면·동 주민센터)와 협약을 맺고 진행하는 공공서비스입니다. 지자체에서 선정한 위기가구 또는 독거어르신 가구에 집배원이 복지 안내문을 배달하면서 건강과 안전 상태를 직접 확인한 뒤 지자체 복지전담팀에 전달합니다.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="border border-rose-100 rounded-2xl overflow-hidden transition-all shadow-sm">
+          <button onclick="toggleFaq(4)" class="w-full text-left p-5 bg-[#FFF9F9] hover:bg-[#FFF1F1] font-bold text-stone-800 flex justify-between items-center transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full bg-redPrimary text-white text-xs flex items-center justify-center font-black shadow-sm">Q</span>
+              우체국 예금은 시중은행과 달리 왜 전액 보호되나요?
+            </span>
+            <i id="faq-icon-4" class="fa-solid fa-chevron-down text-redPrimary transition-transform"></i>
+          </button>
+          <div id="faq-answer-4" class="hidden p-5 bg-white text-stone-600 text-sm leading-relaxed border-t border-rose-100">
+            우체국은 국가기관(과학기술정보통신부 우정사업본부)이 직접 운영하기 때문에 일반 금융회사가 적용받는 5천만 원 예금자보호 한도와 무관하게, 「우체국예금·보험에 관한 법률」 제4조에 의거하여 대한민국 정부가 원금과 이자를 100% 전액 지급 보장합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Office Locator & Contact Section (Red Deep Tone) -->
+  <section class="py-16 bg-gradient-to-b from-crimsonDark to-stone-950 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-redPrimary flex items-center justify-center text-xl shadow-md">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <h4 class="text-xl font-bold">제주지방우정청 청사 안내</h4>
+          </div>
+          <p class="text-rose-100/80 text-sm leading-relaxed mb-4">
+            제주특별자치도 제주시 청사로 59 (도남동, 정부제주지방합동청사)<br>
+            대표전화: 064-728-5900 | 팩스: 064-728-5919
+          </p>
+          <div class="text-xs text-rose-200/60">
+            업무시간: 평일 09:00 ~ 18:00 (우편 창구 09:00 ~ 18:00 / 금융 창구 09:00 ~ 16:30)
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-4 flex items-center gap-2 text-rose-100">
+            <i class="fa-solid fa-map-location-dot text-amber-300"></i> 관할 총괄우체국 안내
+          </h4>
+          <div class="space-y-3 text-sm text-stone-300">
+            <div class="p-3.5 rounded-xl bg-red-950/60 border border-rose-900/50">
+              <div class="font-bold text-white">제주우체국 (제주시 관할)</div>
+              <div class="text-xs text-rose-200/70">제주시 중앙로 108 | 064-729-5114</div>
+            </div>
+            <div class="p-3.5 rounded-xl bg-red-950/60 border border-rose-900/50">
+              <div class="font-bold text-white">서귀포우체국 (서귀포시 관할)</div>
+              <div class="text-xs text-rose-200/70">서귀포시 신중로 55 | 064-730-5114</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold mb-4 flex items-center gap-2 text-rose-100">
+            <i class="fa-solid fa-envelope-circle-check text-rose-300"></i> 도민 제안 및 불편 접수
+          </h4>
+          <p class="text-rose-200/70 text-xs leading-relaxed mb-4">
+            우정 서비스 개선 아이디어나 이용 중 겪으신 불편 사항을 남겨주시면 청장 직속 고객만족팀에서 신속히 검토하여 답변드립니다.
+          </p>
+          <div class="flex gap-2">
+            <input type="text" placeholder="소중한 의견을 입력하세요" class="flex-1 px-3 py-2.5 rounded-xl bg-stone-900 border border-rose-900 text-xs text-white placeholder-rose-200/40 focus:outline-none focus:border-redPrimary">
+            <button onclick="alert('도민 소통 창구에 소중한 의견이 등록되었습니다. 감사합니다!')" class="px-4 py-2.5 bg-redPrimary hover:bg-redPrimaryDark text-xs font-bold rounded-xl transition-colors shadow">
+              등록
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-rose-200/50 text-xs py-8 border-t border-red-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-rose-100">제주지방우정청 대국민 포털</span>
+        <span>|</span>
+        <span>본 웹페이지는 제주지방우정청의 주요 업무와 최신 이슈를 국민들에게 소개하는 안내 포털입니다.</span>
+      </div>
+      <div>
+        © 2026 Jeju Regional Communications Office. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal for Issue Details -->
+  <div id="issueModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl animate-fade-in border border-rose-100">
+      <button onclick="closeIssueModal()" class="absolute top-5 right-5 text-stone-400 hover:text-redPrimary text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modalContent">
+        <!-- Content injected by JavaScript -->
+      </div>
+      <div class="mt-6 pt-4 border-t border-rose-100 flex justify-end">
+        <button onclick="closeIssueModal()" class="px-5 py-2.5 bg-rose-50 hover:bg-rose-100 text-redPrimaryDark font-bold rounded-xl text-sm transition-colors">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Interaction -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Tracking Simulation
+    function handleTrack(event) {
+      event.preventDefault();
+      const input = document.getElementById('trackInput').value.trim();
+      const resultArea = document.getElementById('trackingResult');
+      const resNum = document.getElementById('resNumber');
+      
+      if (!input) return;
+
+      resNum.innerText = input;
+      resultArea.classList.remove('hidden');
+    }
+
+    // Postage Calculation Simulation
+    function calculatePostage() {
+      const type = document.getElementById('postType').value;
+      const weight = document.getElementById('postWeight').value;
+      const priceDisplay = document.getElementById('calcPrice');
+
+      let basePrice = 430;
+
+      if (type === 'standard') {
+        basePrice = (weight === 'light') ? 430 : (weight === 'medium') ? 520 : 1500;
+      } else if (type === 'registered') {
+        basePrice = (weight === 'light') ? 2630 : (weight === 'medium') ? 2820 : 3800;
+      } else if (type === 'parcel') {
+        basePrice = (weight === 'box_small') ? 5000 : (weight === 'box_large') ? 8500 : 4000;
+      } else if (type === 'island') {
+        basePrice = (weight === 'box_small') ? 4000 : (weight === 'box_large') ? 6000 : 3000;
+      }
+
+      priceDisplay.innerText = basePrice.toLocaleString('ko-KR') + '원';
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(id) {
+      const answer = document.getElementById(`faq-answer-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+
+      if (answer.classList.contains('hidden')) {
+        answer.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        answer.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    // Modal Details for Recent Issues
+    const issueDetails = {
+      1: {
+        title: "제주은행 우체국 창구망 공동이용 협약",
+        tag: "금융 상생",
+        color: "text-redPrimary",
+        content: `
+          <div class="space-y-4">
+            <p class="text-sm text-stone-600 leading-relaxed">
+              우정사업본부와 제주은행의 협약을 통해 도내 우체국이 지역 금융 거점으로 한 단계 도약했습니다.
+            </p>
+            <div class="bg-[#FFF5F5] p-4 rounded-2xl text-xs space-y-2 border border-rose-100">
+              <div class="font-bold text-redPrimaryDark text-sm mb-1">💡 주요 혜택 및 내용</div>
+              <p>• <b>창구 및 ATM 전면 개방:</b> 제주은행 고객은 도내 읍·면 및 도서지역 우체국에서 별도 수수료 없이 입·출금과 통장정리 가능</p>
+              <p>• <b>고령층 배려:</b> 디지털 뱅킹 이용이 어려운 어르신들의 대면 금융 접근성을 획기적으로 개선</p>
+              <p>• <b>지역 상생:</b> 공공 우정 인프라와 향토 금융기관의 결합으로 지역 자금 역외 유출 방지 및 포용금융 실현</p>
+            </div>
+          </div>
+        `
+      },
+      2: {
+        title: "제주경찰청 협력 '지역 안심 순찰망'",
+        tag: "치안 & 안전",
+        color: "text-redPrimary",
+        content: `
+          <div class="space-y-4">
+            <p class="text-sm text-stone-600 leading-relaxed">
+              제주지방우정청은 제주경찰청과 함께 도민의 일상을 지키는 촘촘한 '민관 치안 파트너십'을 운영하고 있습니다.
+            </p>
+            <div class="bg-[#FFF5F5] p-4 rounded-2xl text-xs space-y-2 border border-rose-100">
+              <div class="font-bold text-redPrimaryDark text-sm mb-1">🚨 핵심 활동 사항</div>
+              <p>• <b>골목길 위험요소 제보:</b> 집배 중 발견되는 범죄 취약지, 파손된 가로등, 이상 행동 거동수상자 112 즉각 제보</p>
+              <p>• <b>위기가구 발굴:</b> 우편물이 장기 방치되거나 인기척이 없는 취약가구 발견 시 지자체 복지과 연계</p>
+              <p>• <b>보이스피싱 예방:</b> 고령층 고객이 고액 현금 인출 시 창구 직원의 선제적 피싱 차단 및 경찰 합동 대응</p>
+            </div>
+          </div>
+        `
+      },
+      3: {
+        title: "취약계층 '만원의 행복보험' 공익 지원",
+        tag: "공익 복지",
+        color: "text-redPrimary",
+        content: `
+          <div class="space-y-4">
+            <p class="text-sm text-stone-600 leading-relaxed">
+              우체국공익재단 및 제주 도내 복지 유관기관과 손잡고 금융 취약계층의 든든한 사회안전망을 만듭니다.
+            </p>
+            <div class="bg-[#FFF5F5] p-4 rounded-2xl text-xs space-y-2 border border-rose-100">
+              <div class="font-bold text-redPrimaryDark text-sm mb-1">📋 지원 세부사항</div>
+              <p>• <b>지원 내용:</b> 우체국 만원의행복보험 가입 시 본인부담금 1만원을 우정청/지자체 연계 전액 무료 지원</p>
+              <p>• <b>보장 기간:</b> 1년 만기(만기 후 갱신 지원)</p>
+              <p>• <b>보장 내역:</b> 상해 입원일당(1일당 지급), 재해 골절 치료비 및 유족위로금 등 실질적 상해 사고 집중 보장</p>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    function openIssueModal(id) {
+      const data = issueDetails[id];
+      if (!data) return;
+
+      const modal = document.getElementById('issueModal');
+      const content = document.getElementById('modalContent');
+
+      content.innerHTML = `
+        <span class="inline-block text-xs font-bold px-3 py-1 rounded-full bg-rose-100 ${data.color} mb-3 border border-rose-200">${data.tag}</span>
+        <h3 class="text-xl font-bold text-stone-900 mb-4">${data.title}</h3>
+        ${data.content}
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeIssueModal() {
+      document.getElementById('issueModal').classList.add('hidden');
+    }
+
+    // Close modal on click outside
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('issueModal');
+      if (e.target === modal) {
+        closeIssueModal();
+      }
+    });
+
+    /* ========================================================
+       우편통계정보 (연도별 vs 매일자료 동적 렌더링 스크립트)
+       ======================================================== */
+    let currentStatsMode = 'year'; // 'year' | 'daily'
+    let selectedYear = 2025;
+
+    // 연도별 데이터셋 (공공데이터포털 및 국가승인통계 제12002호 기준)
+    const annualStatsData = {
+      2025: {
+        totalVolume: "약 24.6",
+        totalUnit: "억 통",
+        perCapita: "48.1",
+        offices: "3,200",
+        jejuHighlight: "특산물 1위",
+        jejuHighlightSub: "(소포비중)",
+        sub1: "전자고지 확대로 통상우편 완만 감소",
+        sub2: "서신·등기·소포 통합 1인 평균 이용량",
+        sub3: "총괄국·일반국·우편취급국·별정국 포함",
+        sub4: "감귤·수산물 항공·해상 전용선박망",
+        gauges: [
+          { label: "일반통상 우편 (서신, 일반고지서 등)", val: "78.5% (약 19.3억 통)", pct: 78.5 },
+          { label: "우체국소포 및 택배 물류", val: "15.2% (약 3.7억 통)", pct: 15.2 },
+          { label: "특수통상 (등기우편, 내용증명, 복지등기)", val: "5.8% (약 1.4억 통)", pct: 5.8 },
+          { label: "국제우편 및 EMS(국제특급)", val: "0.5% (약 1,200만 통)", pct: 2.5 }
+        ],
+        regionColHeader: "물류 비중",
+        regions: [
+          { name: "서울지방우정청", area: "서울특별시 전역", postOffices: "약 400여 국", metric: "28.4%" },
+          { name: "경인지방우정청", area: "경기도, 인천광역시", postOffices: "약 620여 국", metric: "29.1%" },
+          { name: "부산지방우정청", area: "부산·울산·경남", postOffices: "약 480여 국", metric: "14.2%" },
+          { name: "충청지방우정청", area: "대전·세종·충남북", postOffices: "약 420여 국", metric: "9.8%" },
+          { name: "경북지방우정청", area: "대구·경북", postOffices: "약 410여 국", metric: "8.3%" },
+          { name: "전남지방우정청", area: "광주·전남", postOffices: "약 370여 국", metric: "4.5%" },
+          { name: "강원지방우정청", area: "강원특별자치도", postOffices: "약 210여 국", metric: "2.6%" },
+          { name: "전북지방우정청", area: "전북특별자치도", postOffices: "약 240여 국", metric: "2.1%" },
+          { name: "제주지방우정청", area: "제주특별자치도 전역 (도서포함)", postOffices: "약 40여 국", metric: "1.0% (특산물 특화)", isJeju: true }
+        ]
+      },
+      2024: {
+        totalVolume: "약 25.8",
+        totalUnit: "억 통",
+        perCapita: "50.5",
+        offices: "3,250",
+        jejuHighlight: "소포 780만",
+        jejuHighlightSub: "통 취급",
+        sub1: "모바일 고지 확산 전년 대비 -4.2%",
+        sub2: "국민 1인당 연평균 약 50통 이용",
+        sub3: "전국 우정 네트워크 안정 운영",
+        sub4: "제주 감귤철 직배송 체계 가동",
+        gauges: [
+          { label: "일반통상 우편 (서신, 일반고지서 등)", val: "79.2% (약 20.4억 통)", pct: 79.2 },
+          { label: "우체국소포 및 택배 물류", val: "14.6% (약 3.8억 통)", pct: 14.6 },
+          { label: "특수통상 (등기우편, 내용증명)", val: "5.7% (약 1.5억 통)", pct: 5.7 },
+          { label: "국제우편 및 EMS(국제특급)", val: "0.5% (약 1,300만 통)", pct: 2.5 }
+        ],
+        regionColHeader: "물류 비중",
+        regions: [
+          { name: "서울지방우정청", area: "서울특별시 전역", postOffices: "약 405여 국", metric: "28.7%" },
+          { name: "경인지방우정청", area: "경기도, 인천광역시", postOffices: "약 625여 국", metric: "28.9%" },
+          { name: "부산지방우정청", area: "부산·울산·경남", postOffices: "약 485여 국", metric: "14.1%" },
+          { name: "충청지방우정청", area: "대전·세종·충남북", postOffices: "약 425여 국", metric: "9.7%" },
+          { name: "경북지방우정청", area: "대구·경북", postOffices: "약 415여 국", metric: "8.4%" },
+          { name: "전남지방우정청", area: "광주·전남", postOffices: "약 375여 국", metric: "4.5%" },
+          { name: "강원지방우정청", area: "강원특별자치도", postOffices: "약 215여 국", metric: "2.6%" },
+          { name: "전북지방우정청", area: "전북특별자치도", postOffices: "약 245여 국", metric: "2.1%" },
+          { name: "제주지방우정청", area: "제주특별자치도 전역 (도서포함)", postOffices: "약 40여 국", metric: "1.0%", isJeju: true }
+        ]
+      },
+      2023: {
+        totalVolume: "약 27.1",
+        totalUnit: "억 통",
+        perCapita: "52.8",
+        offices: "3,300",
+        jejuHighlight: "공공물류",
+        jejuHighlightSub: "안심망 확충",
+        sub1: "포스트 코로나 비대면 쇼핑 물류 지속",
+        sub2: "국민 1인당 연평균 52.8통",
+        sub3: "스마트 창구 및 자동화 기기 확대",
+        sub4: "추자·우도 드론 및 선박 배송 시범",
+        gauges: [
+          { label: "일반통상 우편 (서신, 일반고지서 등)", val: "80.1% (약 21.7억 통)", pct: 80.1 },
+          { label: "우체국소포 및 택배 물류", val: "13.9% (약 3.8억 통)", pct: 13.9 },
+          { label: "특수통상 (등기우편, 내용증명)", val: "5.5% (약 1.5억 통)", pct: 5.5 },
+          { label: "국제우편 및 EMS(국제특급)", val: "0.5% (약 1,350만 통)", pct: 2.5 }
+        ],
+        regionColHeader: "물류 비중",
+        regions: [
+          { name: "서울지방우정청", area: "서울특별시 전역", postOffices: "약 410여 국", metric: "29.0%" },
+          { name: "경인지방우정청", area: "경기도, 인천광역시", postOffices: "약 630여 국", metric: "28.5%" },
+          { name: "부산지방우정청", area: "부산·울산·경남", postOffices: "약 490여 국", metric: "14.2%" },
+          { name: "충청지방우정청", area: "대전·세종·충남북", postOffices: "약 430여 국", metric: "9.6%" },
+          { name: "경북지방우정청", area: "대구·경북", postOffices: "약 420여 국", metric: "8.5%" },
+          { name: "전남지방우정청", area: "광주·전남", postOffices: "약 380여 국", metric: "4.6%" },
+          { name: "강원지방우정청", area: "강원특별자치도", postOffices: "약 220여 국", metric: "2.6%" },
+          { name: "전북지방우정청", area: "전북특별자치도", postOffices: "약 250여 국", metric: "2.0%" },
+          { name: "제주지방우정청", area: "제주특별자치도 전역 (도서포함)", postOffices: "약 41여 국", metric: "1.0%", isJeju: true }
+        ]
+      },
+      2022: {
+        totalVolume: "약 28.5",
+        totalUnit: "억 통",
+        perCapita: "55.3",
+        offices: "3,350",
+        jejuHighlight: "농산물 직배",
+        jejuHighlightSub: "집중 지원",
+        sub1: "방역물품 및 공공 물류 수송 기여",
+        sub2: "국민 1인당 연평균 55.3통",
+        sub3: "전국 우체국 방역 안심창구 운영",
+        sub4: "제주 산지직송 전자상거래 급증",
+        gauges: [
+          { label: "일반통상 우편 (서신, 일반고지서 등)", val: "81.0% (약 23.1억 통)", pct: 81.0 },
+          { label: "우체국소포 및 택배 물류", val: "13.2% (약 3.7억 통)", pct: 13.2 },
+          { label: "특수통상 (등기우편, 내용증명)", val: "5.3% (약 1.5억 통)", pct: 5.3 },
+          { label: "국제우편 및 EMS(국제특급)", val: "0.5% (약 1,400만 통)", pct: 2.5 }
+        ],
+        regionColHeader: "물류 비중",
+        regions: [
+          { name: "서울지방우정청", area: "서울특별시 전역", postOffices: "약 415여 국", metric: "29.3%" },
+          { name: "경인지방우정청", area: "경기도, 인천광역시", postOffices: "약 635여 국", metric: "28.3%" },
+          { name: "부산지방우정청", area: "부산·울산·경남", postOffices: "약 495여 국", metric: "14.2%" },
+          { name: "충청지방우정청", area: "대전·세종·충남북", postOffices: "약 435여 국", metric: "9.5%" },
+          { name: "경북지방우정청", area: "대구·경북", postOffices: "약 425여 국", metric: "8.5%" },
+          { name: "전남지방우정청", area: "광주·전남", postOffices: "약 385여 국", metric: "4.6%" },
+          { name: "강원지방우정청", area: "강원특별자치도", postOffices: "약 225여 국", metric: "2.6%" },
+          { name: "전북지방우정청", area: "전북특별자치도", postOffices: "약 255여 국", metric: "2.0%" },
+          { name: "제주지방우정청", area: "제주특별자치도 전역 (도서포함)", postOffices: "약 42여 국", metric: "1.0%", isJeju: true }
+        ]
+      }
+    };
+
+    // 일자별(매일) 실시간 추정 물류 데이터 생성기 (당일 영업일 기준)
+    function generateDailyData() {
+      const now = new Date();
+      const dateString = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 (${['일','월','화','수','목','금','토'][now.getDay()]})`;
+      
+      // 일일 전국 물량은 연간 약 24.6억통 / 260영업일 ≈ 약 850만~950만 통 범위
+      const dailyTotal = (8.8 + (Math.sin(now.getDate()) * 0.5)).toFixed(1); // 약 8.5~9.3백만통
+      const dailyParcels = (130 + Math.floor(Math.random() * 15)).toLocaleString(); // 일일 소포 약 130~145만 상자
+      const jejuDaily = (8.2 + (Math.random() * 0.6)).toFixed(1); // 제주 일일 약 8.5만통
+
+      return {
+        dateStr: dateString,
+        totalVolume: `약 ${dailyTotal}`,
+        totalUnit: "백만 통",
+        perCapita: `${dailyParcels}`,
+        perCapitaUnit: "만 상자",
+        offices: "3,200",
+        jejuHighlight: `약 ${jejuDaily}`,
+        jejuHighlightSub: "만 통(당일)",
+        sub1: "전국 우편집중국 25개소 야간·주간 수송망 풀가동",
+        sub2: "전국 당일 접수·배달 우체국택배(소포) 물량",
+        sub3: "전국 집배원 1만 6천여 명 당일 정시 배달 중",
+        sub4: "제주공항 화물편 & 제주항 카페리 당일 직송",
+        gauges: [
+          { label: "당일 일반통상 우편 (공공기관·기업 고지서, 서신)", val: "77.1% (약 680만 통)", pct: 77.1 },
+          { label: "당일 우체국소포·전자상거래 직배송", val: "16.8% (약 148만 통)", pct: 16.8 },
+          { label: "당일 특수통상 (등기우편, 복지등기, 법원서류)", val: "5.6% (약 49만 통)", pct: 5.6 },
+          { label: "당일 국제우편 및 EMS 인천공항 이송", val: "0.5% (약 4.4만 통)", pct: 2.5 }
+        ],
+        regionColHeader: "일일 접수·배달량",
+        regions: [
+          { name: "서울지방우정청", area: "서울특별시 전역", postOffices: "약 400여 국", metric: "약 252만 통 (28.5%)" },
+          { name: "경인지방우정청", area: "경기도, 인천광역시", postOffices: "약 620여 국", metric: "약 258만 통 (29.2%)" },
+          { name: "부산지방우정청", area: "부산·울산·경남", postOffices: "약 480여 국", metric: "약 125만 통 (14.1%)" },
+          { name: "충청지방우정청", area: "대전·세종·충남북", postOffices: "약 420여 국", metric: "약 86만 통 (9.7%)" },
+          { name: "경북지방우정청", area: "대구·경북", postOffices: "약 410여 국", metric: "약 73만 통 (8.3%)" },
+          { name: "전남지방우정청", area: "광주·전남", postOffices: "약 370여 국", metric: "약 40만 통 (4.5%)" },
+          { name: "강원지방우정청", area: "강원특별자치도", postOffices: "약 210여 국", metric: "약 23만 통 (2.6%)" },
+          { name: "전북지방우정청", area: "전북특별자치도", postOffices: "약 240여 국", metric: "약 19만 통 (2.1%)" },
+          { name: "제주지방우정청", area: "제주특별자치도 전역 (도서포함)", postOffices: "약 40여 국", metric: `약 ${jejuDaily}만 통 (1.0%)`, isJeju: true }
+        ]
+      };
+    }
+
+    // 통계 모드 전환 (연도별 vs 매일자료)
+    function switchStatsMode(mode) {
+      currentStatsMode = mode;
+      const btnYear = document.getElementById('btnTabYear');
+      const btnDaily = document.getElementById('btnTabDaily');
+      const filterYearGroup = document.getElementById('filterYearGroup');
+      const filterDailyGroup = document.getElementById('filterDailyGroup');
+      const statsBadge = document.getElementById('statsModeBadge');
+
+      if (mode === 'year') {
+        btnYear.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-redPrimary shadow-sm";
+        btnDaily.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-stone-600 hover:text-redPrimary";
+        filterYearGroup.classList.remove('hidden');
+        filterYearGroup.classList.add('flex');
+        filterDailyGroup.classList.add('hidden');
+        filterDailyGroup.classList.remove('flex');
+        statsBadge.innerText = "연간 공식 승인통계";
+        document.getElementById('metricTitle1').innerText = "연간 총 접수 우편물량";
+        document.getElementById('metricTitle2').innerText = "국민 1인당 연간 이용량";
+        document.getElementById('metricTitle4').innerText = "제주지방우정청 비중";
+        renderYearData(selectedYear);
+      } else {
+        btnDaily.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-redPrimary shadow-sm";
+        btnYear.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-stone-600 hover:text-redPrimary";
+        filterYearGroup.classList.add('hidden');
+        filterYearGroup.classList.remove('flex');
+        filterDailyGroup.classList.remove('hidden');
+        filterDailyGroup.classList.add('flex');
+        statsBadge.innerText = "당일 물류망 실시간 추정통계";
+        document.getElementById('metricTitle1').innerText = "오늘 전국 일일 우편물량";
+        document.getElementById('metricTitle2').innerText = "오늘 우체국택배(소포)";
+        document.getElementById('metricTitle4').innerText = "제주 당일 취급물량";
+        renderDailyData();
+      }
+    }
+
+    // 연도 선택 버튼 핸들러
+    function selectYear(year) {
+      selectedYear = year;
+      document.querySelectorAll('.year-btn').forEach(btn => {
+        btn.className = "year-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-50 text-stone-700 hover:bg-rose-100 transition-all";
+      });
+      const activeBtn = document.getElementById(`btnYear${year}`);
+      if (activeBtn) {
+        activeBtn.className = "year-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-redPrimary text-white shadow-sm transition-all";
+      }
+      renderYearData(year);
+    }
+
+    // 연도별 데이터 화면 렌더링
+    function renderYearData(year) {
+      const data = annualStatsData[year];
+      if (!data) return;
+
+      document.getElementById('statTotalVolume').innerHTML = `${data.totalVolume}<span class="text-base font-bold text-redPrimary ml-1">${data.totalUnit}</span>`;
+      document.getElementById('statPerCapita').innerHTML = `${data.perCapita}<span class="text-base font-bold text-redPrimary ml-1">통</span>`;
+      document.getElementById('statOffices').innerHTML = `${data.offices}<span class="text-base font-bold text-redPrimary ml-1">여 개소</span>`;
+      document.getElementById('statJejuFocus').innerHTML = `${data.jejuHighlight}<span class="text-base font-bold text-redPrimary ml-1">${data.jejuHighlightSub}</span>`;
+
+      document.getElementById('metricSub1').innerText = data.sub1;
+      document.getElementById('metricSub2').innerText = data.sub2;
+      document.getElementById('metricSub3').innerText = data.sub3;
+      document.getElementById('metricSub4').innerText = data.sub4;
+
+      // Gauges
+      data.gauges.forEach((g, idx) => {
+        const i = idx + 1;
+        document.getElementById(`gaugeLabel${i}`).innerText = g.label;
+        document.getElementById(`gaugeVal${i}`).innerText = g.val;
+        document.getElementById(`gaugeBar${i}`).style.width = `${g.pct}%`;
+      });
+
+      // Table Header & Rows
+      document.getElementById('colHeaderVol').innerText = data.regionColHeader;
+      renderTableRows(data.regions);
+    }
+
+    // 일자별(매일) 데이터 화면 렌더링
+    function renderDailyData() {
+      const data = generateDailyData();
+      document.getElementById('dailyCurrentDate').innerText = data.dateStr;
+
+      document.getElementById('statTotalVolume').innerHTML = `${data.totalVolume}<span class="text-base font-bold text-redPrimary ml-1">${data.totalUnit}</span>`;
+      document.getElementById('statPerCapita').innerHTML = `${data.perCapita}<span class="text-base font-bold text-redPrimary ml-1">${data.perCapitaUnit}</span>`;
+      document.getElementById('statOffices').innerHTML = `${data.offices}<span class="text-base font-bold text-redPrimary ml-1">여 개소</span>`;
+      document.getElementById('statJejuFocus').innerHTML = `${data.jejuHighlight}<span class="text-base font-bold text-redPrimary ml-1">${data.jejuHighlightSub}</span>`;
+
+      document.getElementById('metricSub1').innerText = data.sub1;
+      document.getElementById('metricSub2').innerText = data.sub2;
+      document.getElementById('metricSub3').innerText = data.sub3;
+      document.getElementById('metricSub4').innerText = data.sub4;
+
+      // Gauges
+      data.gauges.forEach((g, idx) => {
+        const i = idx + 1;
+        document.getElementById(`gaugeLabel${i}`).innerText = g.label;
+        document.getElementById(`gaugeVal${i}`).innerText = g.val;
+        document.getElementById(`gaugeBar${i}`).style.width = `${g.pct}%`;
+      });
+
+      // Table Header & Rows
+      document.getElementById('colHeaderVol').innerText = data.regionColHeader;
+      renderTableRows(data.regions);
+    }
+
+    // 공통 테이블 렌더러
+    function renderTableRows(regions) {
+      const tbody = document.getElementById('regionalTableBody');
+      tbody.innerHTML = regions.map(r => {
+        if (r.isJeju) {
+          return `
+            <tr class="bg-red-50/80 font-bold text-redPrimary border-t-2 border-red-200">
+              <td class="py-2.5 px-3 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-redPrimary animate-pulse"></span> ${r.name}
+              </td>
+              <td class="py-2.5 px-3 text-stone-800">${r.area}</td>
+              <td class="py-2.5 px-3 text-center text-stone-800">${r.postOffices}</td>
+              <td class="py-2.5 px-3 text-right text-redPrimary font-bold">${r.metric}</td>
+            </tr>
+          `;
+        }
+        return `
+          <tr class="hover:bg-rose-50/50 transition-colors">
+            <td class="py-2.5 px-3 font-bold text-stone-900">${r.name}</td>
+            <td class="py-2.5 px-3">${r.area}</td>
+            <td class="py-2.5 px-3 text-center">${r.postOffices}</td>
+            <td class="py-2.5 px-3 text-right font-semibold text-stone-700">${r.metric}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 매일자료 새로고침 버튼
+    function refreshDailyStats() {
+      if (currentStatsMode === 'daily') {
+        renderDailyData();
+      }
+    }
+
+    // 초기 로딩 시 기본 2025년 연도별 통계 세팅
+    document.addEventListener('DOMContentLoaded', () => {
+      renderYearData(2025);
+    });
+    // DOM 로드 즉시 실행 보장
+    renderYearData(2025);
+  </script>
+</body>
+</html>
